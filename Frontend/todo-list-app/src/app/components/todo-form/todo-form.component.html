@@ -1,0 +1,76 @@
+<form class="todo-form" [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+  <div class="todo-form__field">
+    <label for="title">Title <span class="todo-form__required">*</span></label>
+    <input
+      id="title"
+      type="text"
+      formControlName="title"
+      [maxlength]="titleMaxLength"
+      [attr.aria-invalid]="title?.invalid && title?.touched"
+      aria-describedby="title-error title-hint"
+      placeholder="e.g. Complete Java assignment" />
+    <div class="todo-form__hint" id="title-hint">
+      {{ title?.value?.length || 0 }}/{{ titleMaxLength }}
+    </div>
+    <div class="todo-form__error" id="title-error" role="alert" *ngIf="title?.invalid && title?.touched">
+      <span *ngIf="title?.errors?.['required']">Title is required.</span>
+      <span *ngIf="title?.errors?.['maxlength']">Title must be {{ titleMaxLength }} characters or fewer.</span>
+    </div>
+  </div>
+
+  <div class="todo-form__field">
+    <label for="description">Description</label>
+    <textarea
+      id="description"
+      rows="4"
+      formControlName="description"
+      [maxlength]="descriptionMaxLength"
+      aria-describedby="description-error description-hint"
+      placeholder="Add extra detail about this task"></textarea>
+    <div class="todo-form__hint" id="description-hint">
+      {{ description?.value?.length || 0 }}/{{ descriptionMaxLength }}
+    </div>
+    <div class="todo-form__error" id="description-error" role="alert" *ngIf="description?.invalid && description?.touched">
+      <span *ngIf="description?.errors?.['maxlength']">Description must be {{ descriptionMaxLength }} characters or fewer.</span>
+    </div>
+  </div>
+
+  <div class="todo-form__row">
+    <div class="todo-form__field">
+      <label for="dueDate">Due Date <span class="todo-form__required">*</span></label>
+      <input
+        id="dueDate"
+        type="date"
+        formControlName="dueDate"
+        [attr.aria-invalid]="dueDate?.invalid && dueDate?.touched"
+        aria-describedby="dueDate-error" />
+      <div class="todo-form__error" id="dueDate-error" role="alert" *ngIf="dueDate?.invalid && dueDate?.touched">
+        <span *ngIf="dueDate?.errors?.['required']">A valid due date is required.</span>
+      </div>
+    </div>
+
+    <div class="todo-form__field">
+      <label for="priority">Priority</label>
+      <select id="priority" formControlName="priority">
+        <option *ngFor="let p of priorities" [value]="p">{{ formatLabel(p) }}</option>
+      </select>
+    </div>
+
+    <div class="todo-form__field">
+      <label for="status">Status</label>
+      <select id="status" formControlName="status">
+        <option *ngFor="let s of statuses" [value]="s">{{ formatLabel(s) }}</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="todo-form__actions">
+    <button type="button" class="btn btn--ghost" (click)="onCancel()" [disabled]="submitting">
+      Cancel
+    </button>
+    <button type="submit" class="btn btn--primary" [disabled]="submitting">
+      <mat-icon *ngIf="submitting" class="spin">autorenew</mat-icon>
+      <span>{{ submitting ? 'Saving...' : submitLabel }}</span>
+    </button>
+  </div>
+</form>

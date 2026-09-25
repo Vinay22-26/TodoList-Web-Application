@@ -1,0 +1,121 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 16px;
+  background: #14161f;
+  border-bottom: 1px solid #262837;
+  z-index: 100;
+}
+.navbar__user {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px 6px 6px;
+  border-radius: 999px;
+  background: transparent;
+  border: 1px solid #2c2e40;
+  cursor: pointer;
+  margin-left: 10px;
+
+  &:hover, &:focus-visible {
+    background: #1c1e2a;
+  }
+}
+
+.navbar__user-avatar {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #6c5ce7;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.navbar__user-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #e4e6f0;
+  max-width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  @media (max-width: 480px) {
+    display: none;
+  }
+}
+
+.navbar__menu-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  border: none;
+  background: transparent;
+  color: #e4e6f0;
+  cursor: pointer;
+  transition: background 0.15s ease;
+
+  &:hover, &:focus-visible {
+    background: #21232f;
+  }
+
+  @media (min-width: 900px) {
+    display: none;
+  }
+}
+
+.navbar__brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: #f5f6fa;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.navbar__brand-icon {
+  color: #6c5ce7;
+}
+
+.navbar__quick-add {
+  margin-right:auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 10px;
+  background: #6c5ce7;
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background 0.15s ease, transform 0.1s ease;
+
+  &:hover, &:focus-visible {
+    background: #5b4bd6;
+  }
+  &:active {
+    transform: scale(0.97);
+  }
+}
+
+.navbar__quick-add-text {
+  @media (max-width: 480px) {
+    display: none;
+  }
+}

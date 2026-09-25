@@ -1,0 +1,38 @@
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.app-shell__content--bare {
+  margin-top: 0;
+  padding: 0;
+
+  @media (min-width: 900px) {
+    margin-left: 0;
+    padding: 0;
+  }
+}
+
+.app-shell__content {
+  margin-top: 64px;
+  padding: 24px;
+  flex: 1;
+  min-width: 0;
+
+  @media (min-width: 900px) {
+    margin-left: 260px;
+    padding: 32px;
+  }
+}
+
+.app-shell__overlay {
+  position: fixed;
+  inset: 0;
+  top: 64px;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 90;
+
+  @media (min-width: 900px) {
+    display: none;
+  }
+}

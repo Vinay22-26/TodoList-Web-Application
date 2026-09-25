@@ -1,0 +1,55 @@
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 48px 20px;
+  background: #181a24;
+  border: 1px dashed #2c2e40;
+  border-radius: 14px;
+}
+
+.empty-state__icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  background: #21232f;
+  color: #6d7086;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+
+  mat-icon {
+    font-size: 28px;
+    width: 28px;
+    height: 28px;
+  }
+}
+
+.empty-state__title {
+  color: #f5f6fa;
+  font-size: 16px;
+  margin: 0 0 6px;
+}
+
+.empty-state__message {
+  color: #9295ab;
+  font-size: 14px;
+  max-width: 340px;
+  margin: 0 0 18px;
+}
+
+.empty-state__action {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 20px;
+  border-radius: 10px;
+  background: #6c5ce7;
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+
+  &:hover { background: #5b4bd6; }
+}

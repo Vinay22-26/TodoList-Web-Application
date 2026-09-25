@@ -1,0 +1,25 @@
+<div class="page">
+  <div class="page__header">
+    <a routerLink="/todos" class="page__back" aria-label="Back to todos">
+      <mat-icon>arrow_back</mat-icon>
+    </a>
+    <div>
+      <h1>Add Todo</h1>
+      <p class="page__subtitle">Create a new piece of work to track.</p>
+    </div>
+  </div>
+
+  <div class="page__error" role="alert" *ngIf="error">
+    <mat-icon>error_outline</mat-icon>
+    <span>{{ error }}</span>
+  </div>
+
+  <div class="page__card">
+    <app-todo-form
+      submitLabel="Create Todo"
+      [submitting]="submitting"
+      (formSubmit)="onSubmit($event)"
+      (cancelled)="onCancel()">
+    </app-todo-form>
+  </div>
+</div>

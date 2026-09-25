@@ -1,0 +1,10 @@
+<div class="app-shell" [class.app-shell--bare]="!showShell">
+  <ng-container *ngIf="showShell">
+    <app-navbar (menuToggle)="toggleSidebar()"></app-navbar>
+    <app-sidebar [isOpen]="sidebarOpen" (closeRequest)="closeSidebar()"></app-sidebar>
+    <div class="app-shell__overlay" *ngIf="sidebarOpen" (click)="closeSidebar()"></div>
+  </ng-container>
+  <main class="app-shell__content" [class.app-shell__content--bare]="!showShell">
+    <router-outlet></router-outlet>
+  </main>
+</div>

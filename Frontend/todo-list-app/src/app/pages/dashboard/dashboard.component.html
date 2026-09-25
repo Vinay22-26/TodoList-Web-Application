@@ -1,0 +1,69 @@
+<div class="page">
+  <div class="page__header">
+    <div>
+      <h1>Dashboard</h1>
+      <p class="page__subtitle">Here's an overview of your work.</p>
+    </div>
+    <a routerLink="/todos/add" class="btn btn--primary">
+      <mat-icon>add</mat-icon>
+      <span>Quick Add Todo</span>
+    </a>
+  </div>
+
+  <app-loading-indicator *ngIf="loading" message="Loading dashboard..."></app-loading-indicator>
+
+  <div class="page__error" role="alert" *ngIf="error && !loading">
+    <mat-icon>error_outline</mat-icon>
+    <span>{{ error }}</span>
+  </div>
+
+  <ng-container *ngIf="!loading">
+    <app-dashboard-stats [stats]="stats"></app-dashboard-stats>
+
+    <section class="page__section">
+      <div class="page__section-header">
+        <h2>Today's Todos</h2>
+        <a routerLink="/todos">View all</a>
+      </div>
+      <app-empty-state
+        *ngIf="todaysTodos.length === 0"
+        icon="event_available"
+        title="Nothing due today"
+        message="Enjoy the breathing room, or add something new."
+        actionLabel="Add Todo"
+        actionRoute="/todos/add">
+      </app-empty-state>
+      <div class="todo-grid" *ngIf="todaysTodos.length > 0">
+        <app-todo-card
+          *ngFor="let todo of todaysTodos"
+          [todo]="todo"
+          (statusChange)="onStatusChange($event)"
+          (deleteRequest)="onDeleteRequest($event)">
+        </app-todo-card>
+      </div>
+    </section>
+
+    <section class="page__section">
+      <div class="page__section-header">
+        <h2>Recent Todos</h2>
+        <a routerLink="/todos">View all</a>
+      </div>
+      <app-empty-state
+        *ngIf="recentTodos.length === 0"
+        icon="list_alt"
+        title="No todos yet"
+        message="Create your first todo to get started."
+        actionLabel="Add Todo"
+        actionRoute="/todos/add">
+      </app-empty-state>
+      <div class="todo-grid" *ngIf="recentTodos.length > 0">
+        <app-todo-card
+          *ngFor="let todo of recentTodos"
+          [todo]="todo"
+          (statusChange)="onStatusChange($event)"
+          (deleteRequest)="onDeleteRequest($event)">
+        </app-todo-card>
+      </div>
+    </section>
+  </ng-container>
+</div>

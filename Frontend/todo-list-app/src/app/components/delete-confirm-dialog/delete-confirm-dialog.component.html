@@ -1,0 +1,13 @@
+<div class="delete-dialog">
+  <div class="delete-dialog__icon">
+    <mat-icon>delete_outline</mat-icon>
+  </div>
+  <h2 mat-dialog-title>Delete this todo?</h2>
+  <mat-dialog-content>
+    <p>Are you sure you want to delete <strong>{{ data.title }}</strong>? This action cannot be undone.</p>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button type="button" class="btn btn--ghost" (click)="onCancel()">Cancel</button>
+    <button type="button" class="btn btn--danger" (click)="onConfirm()">Delete</button>
+  </mat-dialog-actions>
+</div>

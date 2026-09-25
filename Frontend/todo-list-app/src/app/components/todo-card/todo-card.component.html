@@ -1,0 +1,53 @@
+<article class="todo-card" [class.todo-card--overdue]="isOverdue">
+  <div class="todo-card__header">
+    <a class="todo-card__title" [routerLink]="['/todos', todo.id]">{{ todo.title }}</a>
+    <button
+      class="todo-card__menu-btn"
+      type="button"
+      [matMenuTriggerFor]="menu"
+      aria-label="Todo actions">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <a mat-menu-item [routerLink]="['/todos', todo.id]">
+        <mat-icon>visibility</mat-icon>
+        <span>View</span>
+      </a>
+      <a mat-menu-item [routerLink]="['/todos', todo.id, 'edit']">
+        <mat-icon>edit</mat-icon>
+        <span>Edit</span>
+      </a>
+      <button mat-menu-item (click)="onMarkCompleted()" [disabled]="todo.status === TodoStatus.COMPLETED">
+        <mat-icon>task_alt</mat-icon>
+        <span>Mark Completed</span>
+      </button>
+      <button mat-menu-item (click)="onDelete()">
+        <mat-icon>delete</mat-icon>
+        <span>Delete</span>
+      </button>
+    </mat-menu>
+  </div>
+
+  <p class="todo-card__description">{{ todo.description || 'No description provided.' }}</p>
+
+  <div class="todo-card__badges">
+    <span class="badge" [ngClass]="statusClass">{{ statusLabel }}</span>
+    <span class="badge" [ngClass]="priorityClass">{{ priorityLabel }} priority</span>
+    <span class="badge badge--overdue" *ngIf="isOverdue">Overdue</span>
+  </div>
+
+  <div class="todo-card__footer">
+    <div class="todo-card__meta">
+      <mat-icon class="todo-card__meta-icon">event</mat-icon>
+      <span>Due {{ todo.dueDate | date:'MMM d, y' }}</span>
+    </div>
+
+    <select
+      class="todo-card__status-select"
+      [attr.aria-label]="'Change status for ' + todo.title"
+      [ngModel]="todo.status"
+      (ngModelChange)="onStatusSelect($event)">
+      <option *ngFor="let s of statuses" [value]="s">{{ s.replace('_',' ') }}</option>
+    </select>
+  </div>
+</article>

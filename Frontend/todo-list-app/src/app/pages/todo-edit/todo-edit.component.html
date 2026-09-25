@@ -1,0 +1,28 @@
+<div class="page">
+  <div class="page__header">
+    <a [routerLink]="['/todos', todoId]" class="page__back" aria-label="Back to details">
+      <mat-icon>arrow_back</mat-icon>
+    </a>
+    <div>
+      <h1>Edit Todo</h1>
+      <p class="page__subtitle">Update the details of this task.</p>
+    </div>
+  </div>
+
+  <app-loading-indicator *ngIf="loading" message="Loading todo..."></app-loading-indicator>
+
+  <div class="page__error" role="alert" *ngIf="error && !loading">
+    <mat-icon>error_outline</mat-icon>
+    <span>{{ error }}</span>
+  </div>
+
+  <div class="page__card" *ngIf="!loading && todo">
+    <app-todo-form
+      [initialValue]="todo"
+      submitLabel="Save Changes"
+      [submitting]="submitting"
+      (formSubmit)="onSubmit($event)"
+      (cancelled)="onCancel()">
+    </app-todo-form>
+  </div>
+</div>

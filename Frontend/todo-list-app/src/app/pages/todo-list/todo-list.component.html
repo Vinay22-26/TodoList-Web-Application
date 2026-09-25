@@ -1,0 +1,48 @@
+<div class="page">
+  <div class="page__header">
+    <div>
+      <h1>Todos</h1>
+      <p class="page__subtitle">{{ visibleTodos.length }} of {{ allTodos.length }} todos shown</p>
+    </div>
+    <a routerLink="/todos/add" class="btn btn--primary">
+      <mat-icon>add</mat-icon>
+      <span>Add Todo</span>
+    </a>
+  </div>
+
+  <app-todo-filters (filtersChange)="onFiltersChange($event)"></app-todo-filters>
+
+  <app-loading-indicator *ngIf="loading" message="Loading todos..."></app-loading-indicator>
+
+  <div class="page__error" role="alert" *ngIf="error && !loading">
+    <mat-icon>error_outline</mat-icon>
+    <span>{{ error }}</span>
+  </div>
+
+  <ng-container *ngIf="!loading && !error">
+    <app-empty-state
+      *ngIf="visibleTodos.length === 0 && allTodos.length === 0"
+      icon="list_alt"
+      title="No todos yet"
+      message="Create your first todo to start tracking your work."
+      actionLabel="Add Todo"
+      actionRoute="/todos/add">
+    </app-empty-state>
+
+    <app-empty-state
+      *ngIf="visibleTodos.length === 0 && allTodos.length > 0"
+      icon="filter_alt_off"
+      title="No matching todos"
+      message="Try adjusting your search or filters.">
+    </app-empty-state>
+
+    <div class="todo-grid" *ngIf="visibleTodos.length > 0">
+      <app-todo-card
+        *ngFor="let todo of visibleTodos"
+        [todo]="todo"
+        (statusChange)="onStatusChange($event)"
+        (deleteRequest)="onDeleteRequest($event)">
+      </app-todo-card>
+    </div>
+  </ng-container>
+</div>

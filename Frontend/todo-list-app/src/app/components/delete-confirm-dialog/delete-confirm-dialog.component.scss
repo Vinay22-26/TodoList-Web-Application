@@ -1,0 +1,60 @@
+.delete-dialog {
+  padding: 8px;
+  max-width: 380px;
+
+  h2 {
+    margin: 0 0 4px;
+    color: #f5f6fa;
+    font-size: 18px;
+  }
+
+  p {
+    color: #a9acc0;
+    font-size: 14px;
+    line-height: 1.5;
+
+    strong {
+      color: #f5f6fa;
+    }
+  }
+}
+
+.delete-dialog__icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: rgba(229, 83, 75, 0.15);
+  color: #e5534b;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  min-height: 40px;
+}
+
+.btn--ghost {
+  background: transparent;
+  color: #d3d5e2;
+  border: 1px solid #2c2e40;
+
+  &:hover { background: #1c1e2a; }
+}
+
+.btn--danger {
+  background: #e5534b;
+  color: #fff;
+
+  &:hover { background: #d1453d; }
+}

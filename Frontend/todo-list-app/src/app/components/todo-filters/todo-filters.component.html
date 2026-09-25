@@ -1,0 +1,38 @@
+<div class="todo-filters">
+  <div class="todo-filters__search">
+    <mat-icon>search</mat-icon>
+    <input
+      type="text"
+      [(ngModel)]="state.search"
+      (ngModelChange)="emit()"
+      placeholder="Search by title or description"
+      aria-label="Search todos" />
+    <button
+      *ngIf="state.search"
+      type="button"
+      class="todo-filters__clear"
+      (click)="clearSearch()"
+      aria-label="Clear search">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <div class="todo-filters__controls">
+    <select [(ngModel)]="state.status" (ngModelChange)="emit()" aria-label="Filter by status">
+      <option value="ALL">All Statuses</option>
+      <option *ngFor="let s of statuses" [value]="s">{{ formatLabel(s) }}</option>
+    </select>
+
+    <select [(ngModel)]="state.priority" (ngModelChange)="emit()" aria-label="Filter by priority">
+      <option value="ALL">All Priorities</option>
+      <option *ngFor="let p of priorities" [value]="p">{{ formatLabel(p) }}</option>
+    </select>
+
+    <select [(ngModel)]="state.sortBy" (ngModelChange)="emit()" aria-label="Sort todos">
+      <option value="dueDate">Sort: Due Date</option>
+      <option value="priority">Sort: Priority</option>
+      <option value="createdAt">Sort: Created Date</option>
+      <option value="title">Sort: Title</option>
+    </select>
+  </div>
+</div>

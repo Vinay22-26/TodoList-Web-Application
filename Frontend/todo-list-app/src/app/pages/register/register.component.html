@@ -1,0 +1,69 @@
+<div class="auth-page">
+  <div class="auth-card">
+    <div class="auth-card__brand">
+      <mat-icon class="auth-card__brand-icon">checklist</mat-icon>
+      <span>TaskFlow</span>
+    </div>
+
+    <h1>Create your account</h1>
+    <p class="auth-card__subtitle">Start tracking your work in seconds.</p>
+
+    <div class="auth-card__error" role="alert" *ngIf="error">
+      <mat-icon>error_outline</mat-icon>
+      <span>{{ error }}</span>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+      <div class="auth-field">
+        <label for="username">Username</label>
+        <input
+          id="username"
+          type="text"
+          formControlName="username"
+          autocomplete="username"
+          [attr.aria-invalid]="username?.invalid && username?.touched" />
+        <div class="auth-field__error" role="alert" *ngIf="username?.invalid && username?.touched">
+          <span *ngIf="username?.errors?.['required']">Username is required.</span>
+          <span *ngIf="username?.errors?.['minlength']">Username must be at least 3 characters.</span>
+          <span *ngIf="username?.errors?.['maxlength']">Username must be 30 characters or fewer.</span>
+        </div>
+      </div>
+
+      <div class="auth-field">
+        <label for="password">Password</label>
+        <input
+          id="password"
+          type="password"
+          formControlName="password"
+          autocomplete="new-password"
+          [attr.aria-invalid]="password?.invalid && password?.touched" />
+        <div class="auth-field__error" role="alert" *ngIf="password?.invalid && password?.touched">
+          <span *ngIf="password?.errors?.['required']">Password is required.</span>
+          <span *ngIf="password?.errors?.['minlength']">Password must be at least 6 characters.</span>
+        </div>
+      </div>
+
+      <div class="auth-field">
+        <label for="confirmPassword">Confirm Password</label>
+        <input
+          id="confirmPassword"
+          type="password"
+          formControlName="confirmPassword"
+          autocomplete="new-password"
+          [attr.aria-invalid]="confirmPassword?.touched && form.errors?.['passwordMismatch']" />
+        <div class="auth-field__error" role="alert" *ngIf="confirmPassword?.touched && form.errors?.['passwordMismatch']">
+          Passwords do not match.
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn--primary" [disabled]="submitting">
+        <mat-icon *ngIf="submitting" class="spin">autorenew</mat-icon>
+        <span>{{ submitting ? 'Creating account...' : 'Create Account' }}</span>
+      </button>
+    </form>
+
+    <p class="auth-card__footer">
+      Already have an account? <a routerLink="/login">Log in</a>
+    </p>
+  </div>
+</div>

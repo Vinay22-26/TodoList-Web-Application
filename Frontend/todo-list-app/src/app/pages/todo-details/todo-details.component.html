@@ -1,0 +1,68 @@
+<div class="page">
+  <div class="page__header">
+    <a routerLink="/todos" class="page__back" aria-label="Back to todos">
+      <mat-icon>arrow_back</mat-icon>
+    </a>
+    <h1>Todo Details</h1>
+  </div>
+
+  <app-loading-indicator *ngIf="loading" message="Loading todo..."></app-loading-indicator>
+
+  <div class="page__error" role="alert" *ngIf="error && !loading">
+    <mat-icon>error_outline</mat-icon>
+    <span>{{ error }}</span>
+    <a routerLink="/todos">Back to todos</a>
+  </div>
+
+  <div class="details-card" *ngIf="!loading && todo">
+    <div class="details-card__top">
+      <h2 class="details-card__title">{{ todo.title }}</h2>
+      <div class="details-card__badges">
+        <span class="badge" [ngClass]="'badge--status-' + todo.status.toLowerCase()">
+          {{ formatLabel(todo.status) }}
+        </span>
+        <span class="badge" [ngClass]="'badge--priority-' + todo.priority.toLowerCase()">
+          {{ formatLabel(todo.priority) }} priority
+        </span>
+        <span class="badge badge--overdue" *ngIf="isOverdue">Overdue</span>
+      </div>
+    </div>
+
+    <p class="details-card__description">{{ todo.description || 'No description provided.' }}</p>
+
+    <div class="details-card__grid">
+      <div class="details-card__item">
+        <mat-icon>event</mat-icon>
+        <div>
+          <span class="details-card__item-label">Due Date</span>
+          <span class="details-card__item-value">{{ todo.dueDate | date:'MMMM d, y' }}</span>
+        </div>
+      </div>
+      <div class="details-card__item">
+        <mat-icon>schedule</mat-icon>
+        <div>
+          <span class="details-card__item-label">Created</span>
+          <span class="details-card__item-value">{{ todo.createdAt | date:'MMMM d, y, h:mm a' }}</span>
+        </div>
+      </div>
+      <div class="details-card__item">
+        <mat-icon>update</mat-icon>
+        <div>
+          <span class="details-card__item-label">Last Updated</span>
+          <span class="details-card__item-value">{{ todo.updatedAt | date:'MMMM d, y, h:mm a' }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="details-card__actions">
+      <a [routerLink]="['/todos', todo.id, 'edit']" class="btn btn--primary">
+        <mat-icon>edit</mat-icon>
+        <span>Edit</span>
+      </a>
+      <button type="button" class="btn btn--danger" (click)="onDelete()">
+        <mat-icon>delete</mat-icon>
+        <span>Delete</span>
+      </button>
+    </div>
+  </div>
+</div>

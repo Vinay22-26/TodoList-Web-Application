@@ -1,0 +1,34 @@
+<nav
+  class="sidebar"
+  [class.sidebar--open]="isOpen"
+  aria-label="Main navigation">
+
+  <a
+    class="sidebar__link"
+    routerLink="/dashboard"
+    routerLinkActive="sidebar__link--active"
+    (click)="onLinkClick()">
+    <mat-icon>dashboard</mat-icon>
+    <span>Dashboard</span>
+  </a>
+
+  <a
+    class="sidebar__link"
+    routerLink="/todos"
+    routerLinkActive="sidebar__link--active"
+    [routerLinkActiveOptions]="{ exact: true }"
+    (click)="onLinkClick()">
+    <mat-icon>list_alt</mat-icon>
+    <span>Todos</span>
+  </a>
+
+  <a
+    class="sidebar__link"
+    routerLink="/todos/add"
+    routerLinkActive="sidebar__link--active"
+    (click)="onLinkClick()">
+    <mat-icon>add_task</mat-icon>
+    <span>Add Todo</span>
+  </a>
+
+</nav>
